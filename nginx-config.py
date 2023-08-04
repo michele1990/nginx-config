@@ -4,12 +4,13 @@ def create_nginx_config(domain, port):
     config_path = f"/etc/nginx/sites-available/{domain}"
     symlink_path = f"/etc/nginx/sites-enabled/{domain}"
 
-    # Remove existing configuration file and symlink if they exist
+    # Remove existing configuration file if it exists
     if os.path.exists(config_path):
         os.remove(config_path)
         print(f"Removed existing configuration file {config_path}.")
 
-    if os.path.exists(symlink_path):
+    # Remove existing symlink if it exists
+    if os.path.islink(symlink_path):
         os.remove(symlink_path)
         print(f"Removed existing symlink {symlink_path}.")
 
